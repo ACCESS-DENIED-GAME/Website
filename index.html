@@ -29,6 +29,9 @@ nav{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:cen
 .navlinks .dot{width:7px;height:7px;border-radius:50%;background:var(--good);display:inline-block;margin-right:8px;box-shadow:0 0 8px #46d98b99}
 .soundbtn{background:none;border:1px solid #303641;color:var(--muted);border-radius:8px;padding:7px 10px;font:600 12px "JetBrains Mono"}
 .soundbtn:hover{border-color:#4a5160;color:var(--text)}
+.discordbtn{display:inline-flex;align-items:center;gap:7px;background:#5865F2;color:white;border-radius:8px;padding:9px 14px;font:700 13px Inter;text-decoration:none}
+.discordbtn:hover{background:#4752c4}
+.discordbtn svg{width:16px;height:16px;fill:white;flex-shrink:0}
 .status{font:600 12px "JetBrains Mono";color:var(--muted)}
 #home,#about,#game{scroll-margin-top:80px}
 .hero{max-width:1120px;margin:0 auto;padding:96px 22px 80px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
@@ -90,9 +93,10 @@ footer{border-top:1px solid var(--line);padding:44px 22px;text-align:center;colo
 .resetlink:hover{border-color:#4a5160;color:#c3c9d3}
 @keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 @media(max-width:900px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
-@media(max-width:750px){.levels{grid-template-columns:repeat(2,1fr)}.top{display:block}.progress{width:100%;margin-top:20px}.vault{justify-content:flex-start}.card{padding:18px}.title{font-size:24px}.navlinks a:not(.navcta){display:none}}
+@media(max-width:750px){.levels{grid-template-columns:repeat(2,1fr)}.top{display:block}.progress{width:100%;margin-top:20px}.vault{justify-content:flex-start}.card{padding:18px}.title{font-size:24px}.navlinks a:not(.navcta):not(.discordbtn){display:none}}
 @media(max-width:560px){.gridp{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:400px){.logo{font-size:14px;letter-spacing:.1em}nav{padding:0 16px}.hero,.about,.app{padding-left:16px;padding-right:16px}.captcha{gap:5px}}
+@media(max-width:480px){nav{height:auto;padding:10px 14px}.navlinks{flex-wrap:wrap;justify-content:flex-end;row-gap:8px}.discordbtn span{display:none}.discordbtn{padding:9px}}
 </style>
 </head>
 <body>
@@ -103,6 +107,7 @@ footer{border-top:1px solid var(--line);padding:44px 22px;text-align:center;colo
     <a href="#about"><span class="dot" aria-hidden="true"></span>SYSTEM ONLINE</a>
     <a href="#about">About</a>
     <button class="soundbtn" id="soundBtn" onclick="toggleSound()" aria-pressed="false">SOUND: OFF</button>
+    <a class="discordbtn" href="https://discord.gg/c6GVJF8R8p" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128c.126-.094.252-.192.372-.291a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.099.246.197.373.291a.077.077 0 0 1-.006.128c-.598.35-1.22.645-1.873.892a.076.076 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.029 19.83 19.83 0 0 0 6.002-3.03.077.077 0 0 0 .032-.057c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.333-.955 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.211 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg><span>Join Discord</span></a>
     <a class="navcta btn" href="#game" style="padding:9px 16px">Play</a>
   </div>
 </nav>
