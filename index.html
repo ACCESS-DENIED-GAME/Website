@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACCESS DENIED</title>
+<meta name="description" content="Fifteen fake login screens, each broken in its own way. A free browser game — bad captchas, a runaway button, memory sequences, timing locks, and ciphered terminals.">
+<meta property="og:title" content="ACCESS DENIED — a login you can't get through">
+<meta property="og:description" content="Fifteen fake security layers stand between you and a fictional account. How far can you get?">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#08090c">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2308090c'/%3E%3Crect x='17' y='29' width='30' height='23' rx='4' fill='%23ff4d5a'/%3E%3Cpath d='M23 29v-7a9 9 0 0 1 18 0v7' stroke='%23ff4d5a' stroke-width='4' fill='none'/%3E%3Ccircle cx='32' cy='40' r='3.4' fill='%2308090c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#08090c;--panel:#101218;--panel2:#151820;--line:#272b35;--text:#f2f4f8;--muted:#8e96a5;--accent:#ff4d5a;--good:#46d98b;--warn:#ffca55}
+*{box-sizing:border-box} body{margin:0;background:radial-gradient(circle at 50% -10%,#202431 0,#0b0d12 40%,var(--bg) 75%);color:var(--text);font-family:Inter,system-ui,sans-serif;min-height:100vh}
+button,input{font:inherit} button{cursor:pointer;-webkit-tap-highlight-color:transparent} .hidden{display:none!important}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:12px;top:-60px;background:var(--accent);color:white;padding:10px 16px;border-radius:8px;font:700 13px Inter;text-decoration:none;z-index:100;transition:top .2s}
+.skip-link:focus{top:12px}
+html{scroll-behavior:smooth}
+nav{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:#090a0dce;backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+.logo{font-weight:800;letter-spacing:.16em}.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:26px;align-items:center}
+.navlinks a{color:var(--muted);text-decoration:none;font:600 13px Inter}
+.navlinks a:hover{color:var(--text)}
+.navlinks .dot{width:7px;height:7px;border-radius:50%;background:var(--good);display:inline-block;margin-right:8px;box-shadow:0 0 8px #46d98b99}
+.soundbtn{background:none;border:1px solid #303641;color:var(--muted);border-radius:8px;padding:7px 10px;font:600 12px "JetBrains Mono"}
+.soundbtn:hover{border-color:#4a5160;color:var(--text)}
+.status{font:600 12px "JetBrains Mono";color:var(--muted)}
+#home,#about,#game{scroll-margin-top:80px}
+.hero{max-width:1120px;margin:0 auto;padding:96px 22px 80px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(38px,6vw,60px);line-height:1.03;margin:0 0 20px;letter-spacing:-.02em}
+.hero .lede{color:var(--muted);font-size:17px;line-height:1.65;max-width:480px;margin:0 0 30px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .stats{display:flex;gap:32px;margin-top:46px;flex-wrap:wrap}
+.hero .stat b{display:block;font:800 26px "JetBrains Mono"}
+.hero .stat span{color:var(--muted);font-size:12px}
+.heroterm{background:#050607;border:1px solid #242831;border-radius:14px;padding:22px;font:13px/1.75 "JetBrains Mono";color:#aeb5c2;box-shadow:0 30px 80px #0009}
+.heroterm .r{color:var(--accent)}.heroterm .g{color:var(--good)}.heroterm .y{color:var(--warn)}
+.heroterm .cursor{display:inline-block;width:8px;height:14px;background:var(--good);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.about{max-width:1120px;margin:0 auto;padding:10px 22px 96px;border-top:1px solid var(--line)}
+.about-head{padding-top:70px;max-width:600px;margin-bottom:40px}
+.about-head h2{font-size:28px;margin:0 0 12px}
+.about-head p{color:var(--muted);line-height:1.65;margin:0}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{border:1px solid var(--line);background:#101219;border-radius:14px;padding:24px}
+.feature .num{display:block;font:700 12px "JetBrains Mono";color:var(--accent);margin-bottom:12px}
+.feature h3{margin:0 0 8px;font-size:16px}
+.feature p{color:var(--muted);font-size:14px;line-height:1.6;margin:0}
+.app{max-width:1120px;margin:0 auto;padding:70px 22px 90px;border-top:1px solid var(--line)}.top{display:flex;justify-content:space-between;align-items:end;margin-bottom:20px}
+.gamebar{display:flex;gap:18px;margin-bottom:22px;flex-wrap:wrap}
+.win-stats{display:flex;gap:24px;justify-content:center;margin:18px 0 24px;flex-wrap:wrap}
+.win-stats .wstat b{display:block;font:800 22px "JetBrains Mono";color:var(--text)}
+.win-stats .wstat span{color:var(--muted);font-size:11px}
+.win-stats .wstat.best b{color:var(--good)}
+.gametitle{font-size:34px;margin:0 0 8px;letter-spacing:-.01em;font-weight:800}.sub{color:var(--muted);margin:0}.progress{width:310px}.bar{height:7px;background:#20242d;border-radius:9px;overflow:hidden}.fill{height:100%;width:10%;background:var(--accent);transition:.35s}.ptext{display:flex;justify-content:space-between;font:12px "JetBrains Mono";color:var(--muted);margin-bottom:8px}
+.vault{display:flex;gap:5px;margin-top:14px;flex-wrap:wrap;justify-content:flex-end}
+.vslot{width:27px;height:31px;border:1px solid var(--line);border-radius:6px;display:flex;align-items:center;justify-content:center;font:700 13px "JetBrains Mono";color:var(--muted);background:#0d0f14;transition:.25s;flex-shrink:0}
+.vslot.filled{color:var(--good);border-color:#245e43;background:#0d1a14}
+.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:28px}.level{border:1px solid var(--line);background:#101219;border-radius:12px;padding:13px;text-align:left;color:var(--muted);transition:.2s}.level:hover:not(:disabled){border-color:#454b59}.level.current{border-color:var(--accent);color:white;box-shadow:0 0 0 1px #ff4d5a22}.level.done{border-color:#245e43}.level:disabled{opacity:.45;cursor:not-allowed}.lnum{font:700 11px "JetBrains Mono";display:block;margin-bottom:5px}.lname{font-weight:700;font-size:13px}
+.card{background:linear-gradient(145deg,#12151c,#0d0f14);border:1px solid var(--line);border-radius:18px;min-height:510px;display:flex;align-items:center;justify-content:center;padding:30px;box-shadow:0 22px 70px #0007;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 3px);pointer-events:none}
+.screen{width:min(680px,100%);position:relative}
+.center{text-align:center}.mono{font-family:"JetBrains Mono",monospace}.eyebrow{font:700 11px "JetBrains Mono";letter-spacing:.18em;color:var(--accent);margin-bottom:12px}.title{font-size:30px;font-weight:800;margin:0 0 10px}.desc{color:var(--muted);line-height:1.6;margin:0 auto 25px;max-width:540px}
+.loginbox{background:#0a0c10;border:1px solid #292e38;border-radius:14px;padding:22px;max-width:430px;margin:auto}.field{text-align:left;margin-bottom:15px}.field label{font-size:12px;color:var(--muted);display:block;margin-bottom:7px}.field input{width:100%;background:#151820;border:1px solid #303641;color:white;border-radius:9px;padding:12px;outline:none}.field input:focus{border-color:#697181}.btn{border:0;border-radius:9px;padding:12px 18px;font-weight:800;background:var(--accent);color:white;text-decoration:none;display:inline-block}.btn.secondary{background:#20242d;color:#dce0e7}.btn:disabled{opacity:.5;cursor:not-allowed}.actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}.error{color:var(--accent);font:600 12px "JetBrains Mono";min-height:19px;margin-top:12px}.success{color:var(--good);font:600 12px "JetBrains Mono";min-height:19px;margin-top:12px}
+.notice{padding:13px;border:1px dashed #3a3f49;border-radius:10px;color:#b4bac5;background:#0b0d11;font:12px "JetBrains Mono";margin:18px 0}
+.code{font:700 27px "JetBrains Mono";letter-spacing:.18em;background:#080a0d;border:1px solid #2c313b;padding:17px;border-radius:10px;display:inline-block;margin:10px 0 20px}
+.captcha{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:430px;margin:15px auto}.tile{aspect-ratio:1;border:1px solid #303641;background:#181c24;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:22px}.tile.selected{outline:3px solid var(--accent);background:#242a34}
+.gridp{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin:20px auto}.choice{padding:16px 10px;border:1px solid var(--line);border-radius:10px;background:#13161d;color:#ddd;text-align:center}.choice .note{display:block;color:var(--muted);font:11px "JetBrains Mono";margin-top:5px}.choice.correct{border-color:var(--good)}.choice.wrong{border-color:var(--accent);animation:shake .2s linear 2}
+.console{background:#050607;border:1px solid #242831;border-radius:10px;text-align:left;padding:18px;font:13px/1.8 "JetBrains Mono";color:#aeb5c2;min-height:150px;white-space:pre-line}.console .r{color:var(--accent)}.console .g{color:var(--good)}.console .y{color:var(--warn)}
+.movearea{height:260px;position:relative;border:1px dashed #343944;border-radius:12px;margin:20px 0;background:#0a0c10;overflow:hidden;touch-action:none}.runaway{position:absolute;transition:left .08s,top .08s,width .2s,font-size .2s}.timer{font:800 42px "JetBrains Mono";margin:10px}.win{font-size:54px;font-weight:900;letter-spacing:.08em;text-shadow:0 0 30px #46d98b66;color:var(--good)}
+#hold{touch-action:none}
+.simon{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:22px 0}
+.stile{width:70px;height:70px;border:0;border-radius:14px;font:800 20px Inter;color:#08090c;opacity:.5;transition:opacity .12s,transform .12s,box-shadow .12s}
+.stile:disabled{cursor:not-allowed}
+.stile.flash{opacity:1;transform:scale(1.08);box-shadow:0 0 26px currentColor}
+.firewall{position:relative;height:44px;border:1px solid #303641;border-radius:10px;background:#0a0c10;margin:20px 0;overflow:hidden}
+.fwzone{position:absolute;top:0;bottom:0;background:#46d98b33;border-left:2px solid var(--good);border-right:2px solid var(--good)}
+.fwmarker{position:absolute;top:4px;bottom:4px;width:6px;background:var(--accent);border-radius:3px;box-shadow:0 0 10px var(--accent)}
+.hintbar{margin-top:24px;display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap}
+.hintclock{font:600 11px "JetBrains Mono";color:var(--muted)}
+.hinttext{display:none;margin-top:12px;padding:12px 16px;border:1px dashed var(--warn);border-radius:10px;background:#1a160b;color:#ffd98a;font:13px "JetBrains Mono";text-align:left}
+.hinttext.show{display:block}
+footer{border-top:1px solid var(--line);padding:44px 22px;text-align:center;color:#596170;font:11px "JetBrains Mono"}
+.resetlink{background:none;border:1px solid #303641;color:#8e96a5;padding:7px 16px;border-radius:8px;font:600 11px "JetBrains Mono";margin-top:14px}
+.resetlink:hover{border-color:#4a5160;color:#c3c9d3}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.features{grid-template-columns:1fr}}
+@media(max-width:750px){.levels{grid-template-columns:repeat(2,1fr)}.top{display:block}.progress{width:100%;margin-top:20px}.vault{justify-content:flex-start}.card{padding:18px}.title{font-size:24px}.navlinks a:not(.navcta){display:none}}
+@media(max-width:560px){.gridp{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.logo{font-size:14px;letter-spacing:.1em}nav{padding:0 16px}.hero,.about,.app{padding-left:16px;padding-right:16px}.captcha{gap:5px}}
+</style>
+</head>
+<body>
+<a href="#game" class="skip-link">Skip to game</a>
+<nav aria-label="Primary">
+  <div class="logo">ACCESS <span>DENIED</span></div>
+  <div class="navlinks">
+    <a href="#about"><span class="dot" aria-hidden="true"></span>SYSTEM ONLINE</a>
+    <a href="#about">About</a>
+    <button class="soundbtn" id="soundBtn" onclick="toggleSound()" aria-pressed="false">SOUND: OFF</button>
+    <a class="navcta btn" href="#game" style="padding:9px 16px">Play</a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div>
+    <h1>Every layer of this login is broken on purpose.</h1>
+    <p class="lede">Fifteen fake security checks stand between you and a fictional account. Bad captchas, buttons that flee your cursor, memory sequences, timing locks, ciphered terminals — beat all fifteen and the system finally lets you in.</p>
+    <div class="cta">
+      <a class="btn" href="#game">Enter the system</a>
+      <a class="btn secondary" href="#about">How it works</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>15</b><span>SECURITY LAYERS</span></div>
+      <div class="stat"><b>1 / HR</b><span>HINTS ALLOWED</span></div>
+      <div class="stat"><b>0</b><span>REAL CREDENTIALS USED</span></div>
+    </div>
+  </div>
+  <div class="heroterm">
+[SYSTEM] boot sequence complete<br>
+[AUTH] awaiting login attempt...<br>
+[AUTH] <span class="r">15 layers detected</span><br>
+[AUTH] <span class="y">hints throttled: 1 per hour</span><br>
+[AUTH] <span class="g">progress persisted locally</span><br>
+[AUTH] status: <span class="g">SYSTEM ONLINE</span><span class="cursor"></span>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-head">
+    <h2>How it works</h2>
+    <p>Every level is a different kind of login you've probably fought with in real life, pushed to its most absurd extreme. Get through all fifteen and the final password is something you build yourself along the way.</p>
+  </div>
+  <div class="features">
+    <div class="feature"><span class="num">01</span><h3>Fifteen broken layers</h3><p>A captcha, a runaway button, a dead server, a decoy form, a memory sequence, a timing lock, ciphered terminals — each level breaks a familiar login pattern in its own way.</p></div>
+    <div class="feature"><span class="num">02</span><h3>One hint per hour</h3><p>Stuck? A hint unlocks once every hour, tracked by the clock rather than the page — closing the tab won't reset it.</p></div>
+    <div class="feature"><span class="num">03</span><h3>Nothing is lost</h3><p>Your level, mistakes, and collected code fragments are saved on this device, so you can leave and pick up exactly where you stopped.</p></div>
+  </div>
+</section>
+
+<div class="app" id="game">
+  <div class="gamebar"><span class="status" id="status">SYSTEM ONLINE</span><span class="status mono" id="mistakes">MISTAKES: 0</span><span class="status mono" id="runtime">TIME: 0:00</span><span class="status mono" id="besttime">BEST: —</span></div>
+  <div class="top">
+    <div><h2 class="gametitle">Login Protocol</h2><p class="sub">Complete each security layer to reach the account.</p></div>
+    <div class="progress"><div class="ptext"><span>PROGRESS</span><span id="pct">10%</span></div><div class="bar"><div class="fill" id="fill"></div></div><div class="vault" id="vault"></div></div>
+  </div>
+  <div class="levels" id="levels"></div>
+  <main class="card"><div class="screen" id="screen"></div></main>
+</div>
+
+<footer>FICTIONAL GAME • NO REAL ACCOUNTS OR CREDENTIALS ARE USED<br><button class="resetlink" onclick="resetProgress()">RESET PROGRESS</button></footer>
+<script>
+const STORAGE_KEY="accessDeniedSaveV2";
+const HINT_COOLDOWN=60*60*1000;
+const CODES=["4","9","1","7","2","6","0","3","8","5","2","6","0","9"];
+const FINAL_PASSWORD=CODES.join("");
+const HINTS={
+ 1:"Username is guest, password is letmein — type them exactly as shown, case doesn't matter.",
+ 2:"Try something like Tr0ub4dor!2X — 12 characters, 2+ uppercase, 2+ numbers, 1+ symbol, nothing repeated back-to-back.",
+ 3:"Only the ★ tiles count. There are exactly four of them — scan row by row.",
+ 4:"Approach the button from below or a corner — it has less room to jump away.",
+ 5:"Just keep holding. It only takes patience, not precision — don't release early.",
+ 6:"Look for the node whose note says its certificate is valid and verified. The rest are flagged.",
+ 7:"ERROR doesn't belong. The real order is SYSTEM, ACCESS, LEVEL, SEVEN.",
+ 8:"The cipher shift is +5. Decoded, the command reads: RESTORE CORE 2047.",
+ 9:"Username: operator, password: frequ3ncy! — and don't forget to solve the verification sum.",
+ 10:"Watch the whole sequence before clicking anything — it always replays in the exact same order if you get it wrong.",
+ 11:"The marker visibly slows near the edges. Click LOCK right as it enters the green zone, not while it's racing through the middle.",
+ 12:"Look for a zero where there should be a letter O (or the reverse) — the odd one differs by exactly one character.",
+ 13:"A=1, B=2, ... Z=26. The sequence decodes to an 8-letter word starting with S.",
+ 14:"Focus on 3-4 characters at a time instead of the whole code at once — it's faster and more accurate than reading it all in one go.",
+ 15:"Read your vault at the top of the page left to right for the password — all fourteen characters. The username is root."
+};
+const levels=[
+{name:"LOGIN",desc:"A straightforward login. Nothing suspicious. Probably.",run:level1},
+{name:"PASSWORD",desc:"The system has decided your password isn't good enough.",run:level2},
+{name:"CAPTCHA",desc:"Prove you are human. The server has questionable standards.",run:level3},
+{name:"RUNAWAY",desc:"The login button has developed a survival instinct.",run:level4},
+{name:"OFFLINE",desc:"The authentication server has gone offline.",run:level5},
+{name:"DECOY",desc:"Another login page. This one isn't what it seems.",run:level6},
+{name:"ADMIN",desc:"Find the missing access code.",run:level7},
+{name:"OVERRIDE",desc:"The system is fighting back. Restore the terminal.",run:level8},
+{name:"ALMOST",desc:"You have the credentials. Or do you?",run:level9},
+{name:"GATEKEEPER",desc:"A sequence lock guards this door.",run:level10},
+{name:"FIREWALL",desc:"Timing is everything here.",run:level11},
+{name:"PATTERN",desc:"Something in this list doesn't belong.",run:level12},
+{name:"CIPHER II",desc:"A second cipher. Twice as strict.",run:level13},
+{name:"LOCKDOWN",desc:"The clock is not your friend.",run:level14},
+{name:"FINAL",desc:"Everything you've learned leads here.",run:level15}
+];
+
+function defaultState(){return{unlocked:1,current:1,solved:[],fragments:{},mistakes:0,hintLastUsed:0,hintsRevealed:{},elapsedMs:0}}
+function clampLevel(n){n=parseInt(n,10);if(isNaN(n)||n<1)return 1;if(n>15)return 15;return n}
+function loadState(){
+ try{
+  const s=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  const merged=s?Object.assign(defaultState(),s):defaultState();
+  merged.unlocked=clampLevel(merged.unlocked);
+  merged.current=clampLevel(merged.current);
+  if(merged.current>merged.unlocked)merged.current=merged.unlocked;
+  if(!Array.isArray(merged.solved))merged.solved=[];
+  merged.solved=merged.solved.filter(n=>Number.isInteger(n)&&n>=1&&n<=15);
+  if(typeof merged.fragments!=="object"||merged.fragments===null)merged.fragments={};
+  if(typeof merged.hintsRevealed!=="object"||merged.hintsRevealed===null)merged.hintsRevealed={};
+  if(typeof merged.mistakes!=="number"||isNaN(merged.mistakes)||merged.mistakes<0)merged.mistakes=0;
+  if(typeof merged.hintLastUsed!=="number"||isNaN(merged.hintLastUsed))merged.hintLastUsed=0;
+  if(typeof merged.elapsedMs!=="number"||isNaN(merged.elapsedMs)||merged.elapsedMs<0)merged.elapsedMs=0;
+  return merged;
+ }catch(e){return defaultState()}
+}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state))}catch(e){}}
+let state=loadState();
+let current=state.current||1;
+let hintInterval=null,captchaInterval=null,simonInterval=null,firewallRaf=null,patternInterval=null,lockdownInterval=null;
+
+// --- Sound ---
+const SOUND_KEY="accessDeniedSound";
+let soundEnabled=localStorage.getItem(SOUND_KEY)==="on";
+let audioCtx=null;
+function playTone(freq,duration,type,vol){
+ if(!soundEnabled)return;
+ try{
+  audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();
+  const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+  osc.type=type;osc.frequency.value=freq;gain.gain.value=vol;
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();
+  gain.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+duration);
+  osc.stop(audioCtx.currentTime+duration+0.02);
+ }catch(e){}
+}
+function soundError(){playTone(160,0.16,"sawtooth",0.05)}
+function soundHint(){playTone(440,0.09,"triangle",0.04)}
+function soundClick(){playTone(600,0.05,"square",0.03)}
+function soundSuccess(){playTone(660,0.09,"sine",0.05);setTimeout(()=>playTone(880,0.14,"sine",0.05),90)}
+function toggleSound(){
+ soundEnabled=!soundEnabled;
+ try{localStorage.setItem(SOUND_KEY,soundEnabled?"on":"off")}catch(e){}
+ updateSoundBtn();
+ if(soundEnabled)soundClick();
+}
+function updateSoundBtn(){
+ const b=document.getElementById("soundBtn");if(!b)return;
+ b.textContent="SOUND: "+(soundEnabled?"ON":"OFF");
+ b.setAttribute("aria-pressed",soundEnabled?"true":"false");
+}
+
+// --- Speedrun timer ---
+const BEST_KEY="accessDeniedBestTime";
+let bestTime=(()=>{try{const v=JSON.parse(localStorage.getItem(BEST_KEY));return typeof v==="number"&&v>0?v:null}catch(e){return null}})();
+let runStartTs=Date.now();
+function runFinished(){return state.solved.length>=15}
+function flushElapsed(){
+ if(runFinished())return;
+ state.elapsedMs=(state.elapsedMs||0)+(Date.now()-runStartTs);
+ runStartTs=Date.now();
+ saveState();
+}
+function formatElapsed(ms){const s=Math.floor(ms/1000);const m=Math.floor(s/60);const sec=s%60;return m+":"+String(sec).padStart(2,"0")}
+function updateTimerDisplay(){
+ const rt=document.getElementById("runtime"),bt=document.getElementById("besttime");
+ if(!rt||!bt)return;
+ const elapsed=(state.elapsedMs||0)+(runFinished()||document.hidden?0:Date.now()-runStartTs);
+ rt.textContent="TIME: "+formatElapsed(elapsed);
+ bt.textContent="BEST: "+(bestTime?formatElapsed(bestTime):"—");
+}
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden)flushElapsed();
+ else runStartTs=Date.now();
+});
+window.addEventListener("beforeunload",flushElapsed);
+setInterval(updateTimerDisplay,1000);
+
+function shuffle(arr){return arr.map(v=>[Math.random(),v]).sort((a,b)=>a[0]-b[0]).map(v=>v[1])}
+function caesar(str,shift){return str.replace(/[A-Za-z]/g,c=>{const base=c<="Z"?65:97;return String.fromCharCode(((c.charCodeAt(0)-base+shift)%26+26)%26+base)})}
+function formatTime(ms){const s=Math.ceil(ms/1000);const m=Math.floor(s/60);const sec=s%60;return m+":"+String(sec).padStart(2,"0")}
+function hintRemainingMs(){return Math.max(0,HINT_COOLDOWN-(Date.now()-state.hintLastUsed))}
+
+function mistake(){state.mistakes++;saveState();updateStatus();soundError()}
+function updateStatus(){document.getElementById("mistakes").textContent="MISTAKES: "+state.mistakes}
+function updateVault(){
+ const v=document.getElementById("vault");if(!v)return;
+ let html="";
+ for(let i=1;i<=14;i++){const val=state.fragments[i];html+=`<div class="vslot ${val?"filled":""}">${val?val:"?"}</div>`}
+ v.innerHTML=html;
+}
+function updateNav(){
+ const el=document.getElementById("levels");el.innerHTML="";
+ levels.forEach((l,i)=>{const n=i+1;const b=document.createElement("button");b.className="level "+(n===current?"current ":"")+(state.solved.includes(n)?"done":"");b.disabled=n>state.unlocked;b.innerHTML=`<span class="lnum">LEVEL ${String(n).padStart(2,"0")}</span><span class="lname">${l.name}</span>`;b.onclick=()=>load(n);el.appendChild(b)});
+ document.getElementById("pct").textContent=Math.round(current/15*100)+"%";document.getElementById("fill").style.width=(current/15*100)+"%";
+}
+function load(n){
+ n=clampLevel(n);
+ if(n>state.unlocked)n=state.unlocked;
+ current=n;state.current=n;saveState();
+ clearInterval(hintInterval);clearInterval(captchaInterval);clearInterval(simonInterval);clearInterval(patternInterval);clearInterval(lockdownInterval);cancelAnimationFrame(firewallRaf);
+ updateNav();updateVault();updateStatus();
+ levels[n-1].run();
+ attachHintUI();
+}
+function complete(){
+ if(!state.solved.includes(current))state.solved.push(current);
+ if(current<15)state.unlocked=Math.max(state.unlocked,current+1);
+ if(current<=14&&!state.fragments[current])state.fragments[current]=CODES[current-1];
+ saveState();updateNav();updateVault();updateStatus();soundSuccess();
+}
+function shell(ey,title,desc,body){document.getElementById("screen").innerHTML=`<div class="center"><div class="eyebrow">${ey}</div><h3 class="title">${title}</h3><p class="desc">${desc}</p>${body}</div>`}
+function nextButton(){return `<div class="actions"><button class="btn" onclick="nextLevel()">CONTINUE</button></div>`}
+function nextLevel(){if(current<15)load(current+1);else level15()}
+
+function attachHintUI(){
+ const c=document.querySelector("#screen .center");if(!c)return;
+ const bar=document.createElement("div");bar.className="hintbar";
+ bar.innerHTML=`<button class="btn secondary" id="hintBtn" onclick="useHint()">GET HINT</button><span class="hintclock mono" id="hintClock"></span>`;
+ c.appendChild(bar);
+ const txt=document.createElement("div");txt.className="hinttext";txt.id="hintText";txt.setAttribute("role","status");txt.setAttribute("aria-live","polite");c.appendChild(txt);
+ updateHintUI();
+ hintInterval=setInterval(()=>{if(!state.hintsRevealed[current])updateHintUI()},1000);
+}
+function useHint(){
+ if(state.hintsRevealed[current])return;
+ if(hintRemainingMs()>0)return;
+ state.hintLastUsed=Date.now();
+ state.hintsRevealed[current]=true;
+ saveState();updateHintUI();soundHint();
+}
+function updateHintUI(){
+ const btn=document.getElementById("hintBtn"),clock=document.getElementById("hintClock"),txt=document.getElementById("hintText");
+ if(!btn)return;
+ if(state.hintsRevealed[current]){
+  btn.disabled=true;btn.textContent="HINT USED";clock.textContent="";
+  txt.textContent=HINTS[current];txt.classList.add("show");
+ }else{
+  txt.classList.remove("show");txt.textContent="";
+  const rem=hintRemainingMs();
+  if(rem<=0){btn.disabled=false;btn.textContent="GET HINT";clock.textContent="1 hint available"}
+  else{btn.disabled=true;btn.textContent="HINT ON COOLDOWN";clock.textContent="next hint in "+formatTime(rem)}
+ }
+}
+function resetProgress(){
+ if(confirm("Reset all saved progress? This can't be undone.")){
+  localStorage.removeItem(STORAGE_KEY);location.reload();
+ }
+}
+
+function level1(){
+ shell("LEVEL 01 / AUTHENTICATION","Welcome back.","Enter the fictional credentials shown below. This is the easy one.",
+ `<div class="notice">username = <b>guest</b> &nbsp; password = <b>letmein</b></div>
+ <div class="loginbox"><div class="field"><label>USERNAME</label><input id="u" autocomplete="off"></div><div class="field"><label>PASSWORD</label><input id="p" type="password"></div><button class="btn" onclick="try1()">LOGIN</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function try1(){if(u.value.trim().toLowerCase()==="guest"&&p.value.trim().toLowerCase()==="letmein"){complete();msg.className="success";msg.textContent="ACCESS LAYER PASSED.";document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())}else{mistake();msg.textContent="INVALID CREDENTIALS."}}
+
+function level2(){
+ shell("LEVEL 02 / POLICY","Password rejected.","Meet the new password policy exactly.",
+ `<div class="notice">Requirements: exactly 12 characters • at least 2 uppercase • at least 2 numbers • at least 1 symbol • no character repeated back-to-back • no spaces</div><div class="loginbox"><div class="field"><label>PASSWORD</label><input id="pw" autocomplete="off"></div><button class="btn" onclick="check2()">SUBMIT</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function check2(){
+ const x=pw.value;
+ const upper=(x.match(/[A-Z]/g)||[]).length,num=(x.match(/[0-9]/g)||[]).length,sym=(x.match(/[^A-Za-z0-9]/g)||[]).length;
+ const noRepeat=!/(.)\1/.test(x),noSpace=!/\s/.test(x);
+ if(x.length===12&&upper>=2&&num>=2&&sym>=1&&noRepeat&&noSpace){complete();msg.className="success";msg.textContent="POLICY ACCEPTED.";document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())}else{mistake();msg.textContent="POLICY VIOLATION. COUNT AGAIN."}
+}
+
+function level3(){
+ const positions=Array.from({length:16},(_,i)=>i);
+ const starIdx=shuffle(positions).slice(0,4).sort((a,b)=>a-b);
+ const pool=["☁","◆","●","▲"];
+ const icons=positions.map(i=>starIdx.includes(i)?"★":pool[Math.floor(Math.random()*pool.length)]);
+ shell("LEVEL 03 / HUMAN CHECK","Select the stars.","Exactly four tiles contain stars. Select all four before the timer runs out, then verify.",
+ `<div class="captcha">${icons.map((x,i)=>`<button class="tile" data-i="${i}" onclick="tile(this)">${x}</button>`).join("")}</div><div class="mono" style="color:var(--muted);font-size:12px;margin-top:8px">TIME LEFT: <span id="timer3">12s</span></div><button class="btn" onclick="check3()">VERIFY</button><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ window.sel=[];window.answers=starIdx;
+ let timeLeft=12;
+ captchaInterval=setInterval(()=>{
+  timeLeft--;const t=document.getElementById("timer3");if(t)t.textContent=timeLeft+"s";
+  if(timeLeft<=0){clearInterval(captchaInterval);mistake();if(current===3){msg.textContent="TIME EXPIRED. REGENERATING.";setTimeout(()=>{if(current===3)level3()},500)}}
+ },1000);
+}
+function tile(b){const i=+b.dataset.i;if(sel.includes(i)){sel=sel.filter(x=>x!==i);b.classList.remove("selected")}else{sel.push(i);b.classList.add("selected")}}
+function check3(){
+ if(JSON.stringify(sel.slice().sort((a,b)=>a-b))===JSON.stringify(answers)){clearInterval(captchaInterval);complete();msg.className="success";msg.textContent="HUMAN VERIFICATION PASSED.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}else{mistake();msg.textContent="INCORRECT. TRY AGAIN."}
+}
+
+function level4(){
+ shell("LEVEL 04 / INPUT","Catch the button.","Click it four times in a row. It shrinks and speeds up each time you catch it — and jumps the instant your cursor gets close.",
+ `<div class="movearea" id="arena"><button id="run" class="btn runaway">LOGIN</button></div><div class="mono" style="color:var(--muted);font-size:12px;margin:8px 0">CAUGHT: <span id="streakstat">0/4</span> &nbsp;·&nbsp; ESCAPES: <span id="missstat">0</span></div><p class="visually-hidden">Keyboard users: press Tab to focus the button, then Enter or Space to activate it without it moving away.</p><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ const b=document.getElementById("run"),a=document.getElementById("arena");
+ let streak=0,misses=0;
+ function size(){return Math.max(38,96-streak*16)}
+ function escape(){
+  const s=size();b.style.width=s+"px";b.style.height=s+"px";b.style.fontSize=Math.max(10,15-streak*1.5)+"px";
+  b.style.left=Math.random()*(a.clientWidth-s)+"px";b.style.top=Math.random()*(a.clientHeight-s)+"px";
+ }
+ b.onmouseenter=()=>{misses++;document.getElementById("missstat").textContent=misses;escape()};
+ b.onclick=(e)=>{
+  e.stopPropagation();streak++;document.getElementById("streakstat").textContent=streak+"/4";
+  if(streak>=4){complete();msg.className="success";msg.textContent="INPUT ACCEPTED.";a.innerHTML="";a.insertAdjacentHTML("beforeend",nextButton())}
+  else{msg.className="success";msg.textContent="CAUGHT "+streak+"/4 — IT'S GETTING FASTER.";escape()}
+ };
+ escape();
+}
+
+function level5(){
+ shell("LEVEL 05 / NETWORK","Authentication server offline.","The server will reconnect if you keep the recovery process alive without letting go.",
+ `<div class="console" id="console">[SYSTEM] authentication node: OFFLINE
+[NET] attempting reconnection...
+[NET] packet loss detected...
+[RECOVERY] hold connection for 8 seconds</div><div class="timer" id="timer">8.0</div><button class="btn" id="hold">HOLD TO RECONNECT</button><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ let start=null,raf=null;
+ const hold=document.getElementById("hold");
+ function tick(t){if(!start)start=t;let s=(t-start)/1000;timer.textContent=Math.max(0,8-s).toFixed(1);if(s>=8){cancelAnimationFrame(raf);complete();msg.className="success";msg.textContent="SERVER RECONNECTED.";hold.disabled=true;hold.insertAdjacentHTML("afterend",nextButton());return}raf=requestAnimationFrame(tick)}
+ hold.onmousedown=()=>{start=null;raf=requestAnimationFrame(tick)};
+ hold.onmouseup=()=>{cancelAnimationFrame(raf);if(start!==null){mistake();msg.textContent="CONNECTION DROPPED. RESTARTING."}start=null;timer.textContent="8.0"};
+ hold.onmouseleave=()=>{cancelAnimationFrame(raf);if(start!==null){mistake();msg.textContent="CONNECTION DROPPED. RESTARTING."}start=null;timer.textContent="8.0"};
+ hold.ontouchstart=(e)=>{e.preventDefault();start=null;raf=requestAnimationFrame(tick)};
+ hold.ontouchend=hold.ontouchcancel=()=>{cancelAnimationFrame(raf);if(start!==null){mistake();msg.textContent="CONNECTION DROPPED. RESTARTING."}start=null;timer.textContent="8.0"};
+}
+
+function level6(){
+ const nodes=shuffle([
+  {label:"LOGIN NODE A",note:"SSL: self-signed",ok:false},
+  {label:"LOGIN NODE B",note:"SSL: expired 2019",ok:false},
+  {label:"LOGIN NODE C",note:"SSL: valid, verified",ok:true},
+  {label:"LOGIN NODE D",note:"SSL: unknown issuer",ok:false},
+  {label:"LOGIN NODE E",note:"SSL: certificate error",ok:false}
+ ]);
+ shell("LEVEL 06 / DECOY","Which login is real?","Only one of these forms connects to the authentication system.",
+ `<div class="gridp">${nodes.map(n=>`<button class="choice" onclick="decoy(this,${n.ok})">${n.label}<span class="note">${n.note}</span></button>`).join("")}</div><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+}
+function decoy(b,ok){if(ok){b.classList.add("correct");complete();msg.className="success";msg.textContent="REAL NODE FOUND.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}else{mistake();b.classList.add("wrong");msg.textContent="DECOY NODE. THE SYSTEM NOTICED. RESHUFFLING.";setTimeout(()=>{if(current===6)level6()},600)}}
+
+function level7(){
+ const withDecoy=shuffle(["SYSTEM","ACCESS","LEVEL","SEVEN","ERROR"]);
+ shell("LEVEL 07 / ADMIN","Recover the access code.","Five fragments are displayed, but one doesn't belong. Arrange the four genuine ones: SYSTEM → ACCESS → LEVEL → SEVEN.",
+ `<div class="gridp">${withDecoy.map(x=>`<button class="choice" onclick="fragment('${x}',this)">${x}</button>`).join("")}</div><div class="code" id="code">_ _ _ _</div><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ window.order=[];window.parts=["SYSTEM","ACCESS","LEVEL","SEVEN"];
+}
+function fragment(x,b){
+ if(x==="ERROR"){mistake();msg.textContent="INVALID FRAGMENT. RESETTING.";setTimeout(()=>{if(current===7)level7()},600);return}
+ if(order.includes(x))return;
+ order.push(x);b.disabled=true;code.textContent=order.map(x=>x[0]).join(" ");
+ if(order.length===4){
+  if(order.join("|")===parts.join("|")){complete();msg.className="success";msg.textContent="ADMIN OVERRIDE CODE ACCEPTED.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}
+  else{mistake();msg.textContent="WRONG ORDER. RESETTING.";setTimeout(()=>{if(current===7)level7()},700)}
+ }
+}
+
+function level8(){
+ const cipher=caesar("RESTORE CORE 2047",5);
+ shell("LEVEL 08 / OVERRIDE","Terminal corrupted.","Enter the override command. It's hidden in the terminal output — the cipher shift is +5.",
+ `<div class="console"><span class="r">[WARN]</span> visual interface unavailable
+[LOG] previous command: STATUS
+[LOG] next command requires 3 parts
+[CIPHER] <b>${cipher}</b></div><div class="loginbox"><div class="field"><label>COMMAND</label><input id="cmd" autocomplete="off"></div><button class="btn" onclick="check8()">EXECUTE</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function check8(){if(cmd.value.trim().toUpperCase()==="RESTORE CORE 2047"){complete();msg.className="success";msg.textContent="SYSTEM RESTORED.";document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())}else{mistake();msg.textContent="COMMAND NOT RECOGNISED."}}
+
+function level9(){
+ const a=Math.floor(Math.random()*8)+2,b=Math.floor(Math.random()*8)+2;
+ window.mathAns=a*b;
+ shell("LEVEL 09 / CREDENTIALS","Almost there.","The credentials are valid. But the login page is checking something else too.",
+ `<div class="notice">USERNAME: <b>operator</b><br>PASSWORD: <b>frequ3ncy!</b></div><div class="loginbox"><div class="field"><label>USERNAME</label><input id="u9"></div><div class="field"><label>PASSWORD</label><input id="p9" type="password"></div><div class="field"><label>VERIFICATION — what is ${a} × ${b}?</label><input id="v9" inputmode="numeric"></div><button class="btn" onclick="check9()">LOGIN</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function check9(){
+ if(u9.value.trim()==="operator"&&p9.value==="frequ3ncy!"&&parseInt(v9.value,10)===window.mathAns){
+  msg.textContent="VALID CREDENTIALS. SECOND CHECK REQUIRED.";
+  setTimeout(()=>{if(current!==9)return;msg.className="success";msg.textContent="SECOND CHECK: COMPLETE.";complete();document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())},600);
+ }else{mistake();msg.textContent="CREDENTIAL CHECK FAILED."}
+}
+
+function level10(){
+ const seq=Array.from({length:5},()=>Math.floor(Math.random()*4));
+ const colors=["#ff4d5a","#46d98b","#ffca55","#5aa9ff"];
+ const labels=["A","B","C","D"];
+ shell("LEVEL 10 / GATEKEEPER","Repeat the sequence.","Watch the flash pattern, then click the four tiles in the same order. Five steps this time.",
+ `<div class="simon" id="simon">${labels.map((l,i)=>`<button class="stile" id="stile${i}" style="background:${colors[i]}" onclick="simonClick(${i})" disabled>${l}</button>`).join("")}</div><div class="mono" id="simonStatus" style="color:var(--muted);font-size:12px;margin-top:10px">WATCH THE SEQUENCE...</div><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ window.simonSeq=seq;window.simonPos=0;window.simonPlayable=false;
+ playSimonSequence(seq);
+}
+function playSimonSequence(seq){
+ let i=0;
+ const tiles=[0,1,2,3].map(n=>document.getElementById("stile"+n));
+ tiles.forEach(t=>{if(t)t.disabled=true});
+ clearInterval(simonInterval);
+ simonInterval=setInterval(()=>{
+  if(current!==10){clearInterval(simonInterval);return}
+  if(i>0&&tiles[seq[i-1]])tiles[seq[i-1]].classList.remove("flash");
+  if(i>=seq.length){
+   clearInterval(simonInterval);tiles.forEach(t=>{if(t)t.disabled=false});
+   const st=document.getElementById("simonStatus");if(st)st.textContent="YOUR TURN";
+   window.simonPlayable=true;return;
+  }
+  if(tiles[seq[i]])tiles[seq[i]].classList.add("flash");
+  soundClick();i++;
+ },550);
+}
+function simonClick(i){
+ if(!window.simonPlayable||current!==10)return;
+ if(i===window.simonSeq[window.simonPos]){
+  window.simonPos++;
+  if(window.simonPos===window.simonSeq.length){complete();msg.className="success";msg.textContent="SEQUENCE MATCHED.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}
+ }else{
+  window.simonPlayable=false;mistake();msg.textContent="WRONG TILE. WATCH AGAIN.";
+  setTimeout(()=>{if(current===10)level10()},700);
+ }
+}
+
+function level11(){
+ shell("LEVEL 11 / FIREWALL","Time the lock.","Click LOCK exactly when the marker is inside the green zone. Land it three times in a row.",
+ `<div class="firewall" id="fw"><div class="fwzone" id="fwzoneEl"></div><div class="fwmarker" id="fwmarker"></div></div><button class="btn" onclick="lockAttempt()">LOCK</button><div class="mono" style="color:var(--muted);font-size:12px;margin-top:8px">STREAK: <span id="fwstreak">0/3</span></div><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ window.fwStreak=0;
+ startFirewall();
+}
+function startFirewall(){
+ window.fwZoneLeft=15+Math.random()*55;window.fwZoneWidth=14;
+ const zoneEl=document.getElementById("fwzoneEl");
+ if(zoneEl){zoneEl.style.left=window.fwZoneLeft+"%";zoneEl.style.width=window.fwZoneWidth+"%"}
+ window.fwPos=0;window.fwDir=1;
+ cancelAnimationFrame(firewallRaf);
+ function frame(){
+  if(current!==11)return;
+  window.fwPos+=window.fwDir*(1+window.fwStreak*0.5);
+  if(window.fwPos>=100){window.fwPos=100;window.fwDir=-1}
+  if(window.fwPos<=0){window.fwPos=0;window.fwDir=1}
+  const m=document.getElementById("fwmarker");if(m)m.style.left=window.fwPos+"%";
+  firewallRaf=requestAnimationFrame(frame);
+ }
+ firewallRaf=requestAnimationFrame(frame);
+}
+function lockAttempt(){
+ if(current!==11)return;
+ const pos=window.fwPos,left=window.fwZoneLeft,right=window.fwZoneLeft+window.fwZoneWidth;
+ const streakEl=document.getElementById("fwstreak");
+ if(pos>=left&&pos<=right){
+  window.fwStreak++;if(streakEl)streakEl.textContent=window.fwStreak+"/3";
+  if(window.fwStreak>=3){cancelAnimationFrame(firewallRaf);complete();msg.className="success";msg.textContent="FIREWALL BYPASSED.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}
+  else{msg.className="success";msg.textContent="LOCKED. "+window.fwStreak+"/3.";startFirewall()}
+ }else{
+  window.fwStreak=0;if(streakEl)streakEl.textContent="0/3";mistake();msg.textContent="MISSED THE ZONE. STREAK RESET.";startFirewall();
+ }
+}
+
+function level12(){
+ const base="C0NN3CT-9F";
+ const total=9;
+ const oddIndex=Math.floor(Math.random()*total);
+ const oddVariant=base.replace("0","O");
+ const tiles=shuffle(Array.from({length:total},(_,i)=>({text:i===oddIndex?oddVariant:base,odd:i===oddIndex})));
+ shell("LEVEL 12 / PATTERN","Find the impostor.","One token differs from the rest by a single character. Find it before time runs out.",
+ `<div class="gridp">${tiles.map((t,i)=>`<button class="choice mono" onclick="patternClick(this,${t.odd})">${t.text}</button>`).join("")}</div><div class="mono" style="color:var(--muted);font-size:12px;margin-top:8px">TIME LEFT: <span id="timer12">10s</span></div><div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ let timeLeft=10;
+ clearInterval(patternInterval);
+ patternInterval=setInterval(()=>{
+  timeLeft--;const t=document.getElementById("timer12");if(t)t.textContent=timeLeft+"s";
+  if(timeLeft<=0){clearInterval(patternInterval);if(current===12){mistake();msg.textContent="TIME EXPIRED. REGENERATING.";setTimeout(()=>{if(current===12)level12()},500)}}
+ },1000);
+}
+function patternClick(b,isOdd){
+ if(current!==12)return;
+ if(isOdd){clearInterval(patternInterval);complete();msg.className="success";msg.textContent="IMPOSTOR TOKEN FOUND.";document.getElementById("screen").insertAdjacentHTML("beforeend",nextButton())}
+ else{mistake();b.classList.add("wrong");msg.textContent="THAT ONE MATCHES. KEEP LOOKING."}
+}
+
+function level13(){
+ const word="SHUTDOWN";
+ const nums=word.split("").map(c=>c.charCodeAt(0)-64);
+ shell("LEVEL 13 / CIPHER II","Decode the command.","Each number is a letter's position in the alphabet (A=1, B=2, ... Z=26). Decode the sequence and enter the word.",
+ `<div class="notice">${nums.join(" - ")}</div><div class="loginbox"><div class="field"><label>DECODED WORD</label><input id="cmd13" autocomplete="off"></div><button class="btn" onclick="check13()">EXECUTE</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function check13(){if(cmd13.value.trim().toUpperCase()==="SHUTDOWN"){complete();msg.className="success";msg.textContent="COMMAND EXECUTED.";document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())}else{mistake();msg.textContent="INCORRECT SEQUENCE."}}
+
+function level14(){
+ const charset="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+ let code="";for(let i=0;i<10;i++)code+=charset[Math.floor(Math.random()*charset.length)];
+ window.code14=code;
+ shell("LEVEL 14 / LOCKDOWN","Type it exactly.","A ten-character override code. Type it before the countdown ends.",
+ `<div class="code">${code}</div><div class="mono" style="color:var(--muted);font-size:12px">TIME LEFT: <span id="timer14">8s</span></div><div class="loginbox"><div class="field"><label>OVERRIDE CODE</label><input id="cmd14" autocomplete="off"></div><button class="btn" onclick="check14()">SUBMIT</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+ let timeLeft=8;
+ clearInterval(lockdownInterval);
+ lockdownInterval=setInterval(()=>{
+  timeLeft--;const t=document.getElementById("timer14");if(t)t.textContent=timeLeft+"s";
+  if(timeLeft<=0){clearInterval(lockdownInterval);if(current===14){mistake();msg.textContent="TOO SLOW. NEW CODE GENERATED.";setTimeout(()=>{if(current===14)level14()},500)}}
+ },1000);
+}
+function check14(){
+ if(current!==14)return;
+ if(cmd14.value.trim().toUpperCase()===window.code14){clearInterval(lockdownInterval);complete();msg.className="success";msg.textContent="CODE ACCEPTED.";document.querySelector(".loginbox").insertAdjacentHTML("afterend",nextButton())}
+ else{mistake();msg.textContent="INCORRECT CODE."}
+}
+
+function level15(){
+ shell("FINAL / ROOT ACCESS","FINAL ACCESS","One last login. Assemble the password from every fragment your vault has collected.",
+ `<div class="notice">USERNAME: <b>root</b><br>PASSWORD: the fourteen characters in your vault, left to right</div><div class="loginbox"><div class="field"><label>USERNAME</label><input id="uf"></div><div class="field"><label>PASSWORD</label><input id="pf" type="password"></div><button class="btn" onclick="finish()">LOGIN</button><div id="msg" class="error" role="status" aria-live="polite"></div></div>`);
+}
+function finish(){
+ if(uf.value.trim().toLowerCase()==="root"&&pf.value.trim()===FINAL_PASSWORD){
+  flushElapsed();
+  complete();
+  const totalTime=state.elapsedMs;
+  const isNewBest=!bestTime||totalTime<bestTime;
+  if(isNewBest){bestTime=totalTime;try{localStorage.setItem(BEST_KEY,JSON.stringify(bestTime))}catch(e){}}
+  updateTimerDisplay();
+  document.getElementById("status").textContent="ACCESS GRANTED";document.getElementById("status").style.color="var(--good)";
+  const shareText="I broke into ACCESS DENIED in "+formatElapsed(totalTime)+" with "+state.mistakes+" mistake"+(state.mistakes===1?"":"s")+".";
+  shell("SYSTEM COMPLETE","ACCESS GRANTED","You made it through every security layer.",
+  `<div class="win">YOU WIN</div>
+   <div class="win-stats">
+    <div class="wstat"><b>${formatElapsed(totalTime)}</b><span>TIME</span></div>
+    <div class="wstat"><b>${state.mistakes}</b><span>MISTAKES</span></div>
+    <div class="wstat best"><b>${isNewBest?"NEW BEST":formatElapsed(bestTime)}</b><span>${isNewBest?"PERSONAL BEST":"BEST TIME"}</span></div>
+   </div>
+   <div class="actions">
+    <button class="btn secondary" onclick="copyResult('${shareText.replace(/'/g,"\\'")}')">COPY RESULT</button>
+    <button class="btn secondary" onclick="resetProgress()">PLAY AGAIN</button>
+   </div>
+   <div id="msg" class="error" role="status" aria-live="polite"></div>`);
+ }else{mistake();msg.textContent="FINAL AUTHENTICATION FAILED."}
+}
+function copyResult(text){
+ const done=()=>{const m=document.getElementById("msg");if(m){m.className="success";m.textContent="RESULT COPIED TO CLIPBOARD."}};
+ const fail=()=>{const m=document.getElementById("msg");if(m){m.className="error";m.textContent="COULD NOT COPY — SELECT AND COPY MANUALLY."}};
+ if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(fail)}
+ else{fail()}
+}
+
+updateSoundBtn();
+updateTimerDisplay();
+load(state.current||1);
+</script>
+</body>
+</html>
